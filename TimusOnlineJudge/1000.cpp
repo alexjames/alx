@@ -1,8 +1,10 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int main()
+int main(void)
 {
-
-	return 0;
+    long long a, b; 
+    cin >> a >> b;
+    cout << a + b << endl;
+    return 0;
 }
