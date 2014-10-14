@@ -1,3 +1,11 @@
+/***
+
+There are two of a number in an array, except for one. Find the one.
+
+Ex. 5, 7, 8, 7, 8, 4, 5
+
+***/
+
 #include<stdio.h>
 
 int main(void)
