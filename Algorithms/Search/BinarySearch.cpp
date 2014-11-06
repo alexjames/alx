@@ -1,3 +1,11 @@
+/***
+Standard Binary Search
+
+Runtime Complexity: O(nlogn) sort + search O(log n)
+
+***/
+
+
 #include <iostream>
 #include <algorithm>
 #define MAX 100
