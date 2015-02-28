@@ -34,6 +34,77 @@ void insert_at_end(struct node **ll, int data)
     }
 }
 
+struct node *rev(struct node *p, struct node *q)
+{
+    struct node *nxt = p->next;
+    p->next = q;
+    if (nxt == NULL)
+    {
+        return p;
+    }
+    return rev(nxt, p);
+}
+
+void reverse_list(struct node **ll)
+{
+    if (*ll == NULL)
+        return;
+
+    *ll = rev(*ll, NULL);
+}
+
+void swaplink(struct node *in)
+{
+    if (in->next == NULL || in->next->next == NULL)
+    {
+        return;
+    }
+    struct node *p = in->next;
+    struct node *q = in->next->next;
+    struct node *out = q->next;
+
+    in->next = q;
+    q->next = p;
+    p->next = out;
+
+    swaplink(p);
+
+}
+
+
+void linkswap(struct node **ll)
+{
+
+    if (*ll == NULL || (*ll)->next == NULL)
+        return;
+
+    // First handle the first two nodes
+
+    struct node *p = *ll;
+    struct node *q = p->next;
+    struct node *out = q->next;
+    *ll = q;
+    q->next = p;
+    p->next = out;
+
+    swaplink(p);
+
+}
+
+void iterative_rev(struct node **ll)
+{
+    struct node *tmp, *p = *ll;
+    struct node *q = NULL;
+    while (p != NULL)
+    {
+        tmp = p->next;
+        p->next = q;
+        q = p;
+        p = tmp;
+    }
+    *ll = q;
+}
+
 void traverse_list(struct node *p)
 {
     while (p != NULL)
@@ -46,9 +117,9 @@ void traverse_list(struct node *p)
 int main(void)
 {
     struct node *p = NULL;
-    insert_at_end(&p, 5);
-    insert_at_end(&p, 6);
-    insert_at_end(&p, 7);
+    insert_at_end(&p, 1);
+    insert_at_end(&p, 2);
+    iterative_rev(&p);
     traverse_list(p);
     return 0;
 }
