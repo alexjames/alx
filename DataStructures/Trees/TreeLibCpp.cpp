@@ -266,7 +266,35 @@ node* tree_deserial(int A[])
 
 }
 
-    int A[20];
+void converttodll(node *n, node **prev, node **head)
+{
+    if (n == NULL || head == NULL || prev == NULL)
+        return;
+
+    converttodll(n->left, prev, head);
+
+    if (*prev == NULL)
+    {
+        *head = n;
+        n->left = *prev;
+    }
+    else
+    {
+        (*prev)->right = n;
+        n->left = *prev;
+        if (n->right == NULL)
+        {
+            n->right = NULL;
+        }
+    }
+    *prev = n;
+
+    converttodll(n->right, prev, head);
+}
+
+
+
+
 int main()
 {
     int T1[7] = {1,2,3,4,5,6,7};
@@ -279,22 +307,13 @@ int main()
     node *t4 = create_subtree(T4, 0, 15);
 
     node *p;
+    node *prev = NULL;
+    converttodll(t1, &prev, &p);
 
-    preorder(t1);
-    cout << endl;
-    inorder(t1);
-    cout << endl;
-    tree_serial(A, t1);
-    for (int i = 0; i < 20; i++)
+    for (node *x = p; x != NULL; x = x->right)
     {
-        cout << A[i];
-    } 
-/*    p = tree_deserial(A);
-    cout << endl;
-    preorder(p);
-    cout << endl;
-    inorder(p);
-    cout << endl;
-*/
+        cout << x->data << " ";
+    }
+
     return 0;
 }
